@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <style>
       .board {
         display: grid;
@@ -14,9 +14,9 @@
       }
 
       .square {
-        background-color: white;
+        background-color: black;
         border: 1px solid black;
-        font-size: 48px;
+        font-size: 50px;
         text-align: center;
         vertical-align: middle;
       }
@@ -36,66 +36,65 @@
       <div class="square" id="8"></div>
     </div>
 
-<script>
-    const squares = document.querySelectorAll(".square");
-const resetButton = document.getElementById("resetButton");
-let currentPlayer = "X";
+    <script>
+      const squares = document.querySelectorAll(".square");
+      const resetButton = document.getElementById("resetButton");
+      let currentPlayer = "X";
 
-for (const square of squares) {
-  square.addEventListener("click", function (event) {
-    if (event.target.textContent === "") {
-      event.target.textContent = currentPlayer;
-      if (currentPlayer === "X") {
-        currentPlayer = "O";
-      } else {
-        currentPlayer = "X";
+      for (const square of squares) {
+        square.addEventListener("click", function (event) {
+          if (event.target.textContent === "") {
+            event.target.textContent = currentPlayer;
+            if (currentPlayer === "X") {
+              currentPlayer = "O";
+            } else {
+              currentPlayer = "X";
+            }
+            checkForWin();
+          }
+        });
       }
-      checkForWin();
-    }
-  });
-}
 
-resetButton.addEventListener("click", function () {
-  for (const square of squares) {
-    square.textContent = "";
-  }
-  currentPlayer = "X";
-});
+      resetButton.addEventListener("click", function () {
+        for (const square of squares) {
+          square.textContent = "";
+        }
+        currentPlayer = "X";
+      });
 
-function checkForWin() {
-  const winningCombinations = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (const combination of winningCombinations) {
-    const [a, b, c] = combination;
-    if (
-      squares[a].textContent === squares[b].textContent &&
-      squares[b].textContent === squares[c].textContent &&
-      squares[a].textContent !== ""
-    ) {
-      alert(`Player ${squares[a].textContent} wins!`);
-      return;
-    }
-  }
-  let isTie = true;
-  for (const square of squares) {
-    if (square.textContent === "") {
-      isTie = false;
-      break;
-    }
-  }
-  if (isTie) {
-    alert("It's a tie!");
-  }
-}
-
-</script>
+      function checkForWin() {
+        const winningCombinations = [
+          [0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8],
+          [0, 3, 6],
+          [1, 4, 7],
+          [2, 5, 8],
+          [0, 4, 8],
+          [2, 4, 6],
+        ];
+        for (const combination of winningCombinations) {
+          const [a, b, c] = combination;
+          if (
+            squares[a].textContent === squares[b].textContent &&
+            squares[b].textContent === squares[c].textContent &&
+            squares[a].textContent !== ""
+          ) {
+            alert(`Player ${squares[a].textContent} wins!`);
+            return;
+          }
+        }
+        let isTie = true;
+        for (const square of squares) {
+          if (square.textContent === "") {
+            isTie = false;
+            break;
+          }
+        }
+        if (isTie) {
+          alert("It's a tie!");
+        }
+      }
+    </script>
   </body>
 </html>
